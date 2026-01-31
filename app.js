@@ -8,6 +8,10 @@ const addButton = document.getElementById("add-button");
 const ideasContainer = document.getElementById("ideas-container");
 const emptyMessage = document.getElementById("empty-message");
 const filterBar = document.getElementById("filter-bar");
+const projectSelect = document.getElementById("project-select");
+const newProjectBtn = document.getElementById("new-project-btn");
+const renameProjectBtn = document.getElementById("rename-project-btn");
+const deleteProjectBtn = document.getElementById("delete-project-btn");
 
 // Track which tag filter is currently active
 let activeFilter = "all";
@@ -15,10 +19,133 @@ let activeFilter = "all";
 // Track which view mode is active: "list" or "tree"
 let activeView = "list";
 
+// Track the currently active project
+let activeProject = null;
+
+
+// --- PROJECT MANAGEMENT ---
+
+function loadProjects() {
+    const saved = localStorage.getItem("thinking-tool-projects");
+    if (saved) {
+        return JSON.parse(saved);
+    }
+    return [];
+}
+
+function saveProjects(projects) {
+    localStorage.setItem("thinking-tool-projects", JSON.stringify(projects));
+}
+
+// One-time migration: move old ideas into a default project
+function migrateOldData() {
+    const projects = loadProjects();
+    if (projects.length > 0) return; // already migrated or projects exist
+
+    const oldIdeas = localStorage.getItem("thinking-tool-ideas");
+    if (oldIdeas) {
+        // Create default project
+        const defaultProject = {
+            id: 1,
+            name: "My First Project",
+            createdAt: new Date().toISOString()
+        };
+        saveProjects([defaultProject]);
+
+        // Move old ideas into project-scoped key
+        localStorage.setItem("thinking-tool-ideas-1", oldIdeas);
+
+        // Remove old key
+        localStorage.removeItem("thinking-tool-ideas");
+    } else {
+        // No old data — create a default empty project
+        const defaultProject = {
+            id: 1,
+            name: "My First Project",
+            createdAt: new Date().toISOString()
+        };
+        saveProjects([defaultProject]);
+    }
+}
+
+function switchProject(projectId) {
+    activeProject = projectId;
+    activeFilter = "all";
+    guidedStep = 0;
+    guidedAnswers = [];
+    renderProjectBar();
+    renderFilterBar();
+    renderIdeas();
+}
+
+function createProject(name) {
+    const projects = loadProjects();
+    const maxId = projects.reduce(function (max, p) { return p.id > max ? p.id : max; }, 0);
+    const newProject = {
+        id: maxId + 1,
+        name: name,
+        createdAt: new Date().toISOString()
+    };
+    projects.push(newProject);
+    saveProjects(projects);
+    switchProject(newProject.id);
+}
+
+function renameProject() {
+    const projects = loadProjects();
+    const current = projects.find(function (p) { return p.id === activeProject; });
+    if (!current) return;
+
+    const newName = prompt("Rename project:", current.name);
+    if (newName === null || newName.trim() === "") return;
+
+    current.name = newName.trim();
+    saveProjects(projects);
+    renderProjectBar();
+}
+
+function deleteProject() {
+    const projects = loadProjects();
+    if (projects.length <= 1) {
+        alert("You can't delete your only project.");
+        return;
+    }
+
+    const current = projects.find(function (p) { return p.id === activeProject; });
+    if (!current) return;
+
+    if (!confirm('Delete project "' + current.name + '" and all its ideas?')) return;
+
+    // Remove project ideas from storage
+    localStorage.removeItem("thinking-tool-ideas-" + activeProject);
+
+    // Remove project from list
+    const remaining = projects.filter(function (p) { return p.id !== activeProject; });
+    saveProjects(remaining);
+
+    // Switch to first remaining project
+    switchProject(remaining[0].id);
+}
+
+function renderProjectBar() {
+    const projects = loadProjects();
+    projectSelect.innerHTML = "";
+
+    for (var i = 0; i < projects.length; i++) {
+        var option = document.createElement("option");
+        option.value = projects[i].id;
+        option.textContent = projects[i].name;
+        if (projects[i].id === activeProject) {
+            option.selected = true;
+        }
+        projectSelect.appendChild(option);
+    }
+}
+
 
 // --- STEP 2: Load any saved ideas from the browser's storage ---
 function loadIdeas() {
-    const saved = localStorage.getItem("thinking-tool-ideas");
+    const saved = localStorage.getItem("thinking-tool-ideas-" + activeProject);
     if (saved) {
         return JSON.parse(saved);
     } else {
@@ -29,7 +156,7 @@ function loadIdeas() {
 
 // --- STEP 3: Save ideas to the browser's storage ---
 function saveIdeas(ideas) {
-    localStorage.setItem("thinking-tool-ideas", JSON.stringify(ideas));
+    localStorage.setItem("thinking-tool-ideas-" + activeProject, JSON.stringify(ideas));
 }
 
 
@@ -567,7 +694,7 @@ function renderTreeView(ideas) {
         var msg = document.createElement("p");
         msg.id = "empty-message";
         msg.style.textAlign = "center";
-        msg.style.color = "#555";
+        msg.style.color = "#9a8872";
         msg.style.padding = "40px";
         msg.style.fontStyle = "italic";
         msg.textContent = "No ideas yet. Start by adding one below.";
@@ -676,13 +803,13 @@ function renderTreeView(ideas) {
                     " " + line.x2 + " " + line.y2;
 
             path.setAttribute("d", d);
-            path.setAttribute("stroke", "#0f3460");
+            path.setAttribute("stroke", "#c9b896");
             path.setAttribute("stroke-width", "2");
             path.setAttribute("fill", "none");
 
             // Trunk connections get gold lines
             if (treeRoots[r].isTrunk) {
-                path.setAttribute("stroke", "#ffd70066");
+                path.setAttribute("stroke", "#b8860baa");
             }
 
             svg.appendChild(path);
@@ -1163,7 +1290,25 @@ listViewBtn.addEventListener("click", function () { setActiveView("list"); });
 treeViewBtn.addEventListener("click", function () { setActiveView("tree"); });
 guidedViewBtn.addEventListener("click", function () { setActiveView("guided"); });
 
+// Project bar event listeners
+projectSelect.addEventListener("change", function () {
+    switchProject(Number(projectSelect.value));
+});
+
+newProjectBtn.addEventListener("click", function () {
+    var name = prompt("New project name:");
+    if (name === null || name.trim() === "") return;
+    createProject(name.trim());
+});
+
+renameProjectBtn.addEventListener("click", renameProject);
+deleteProjectBtn.addEventListener("click", deleteProject);
+
 
 // --- STEP 25: Start the app! ---
+migrateOldData();
+var projects = loadProjects();
+activeProject = projects[0].id;
+renderProjectBar();
 renderFilterBar();
 renderIdeas();

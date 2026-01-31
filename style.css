@@ -1,5 +1,6 @@
 /* ===========================
    THINKING TOOL - STYLES
+   School of Athens meets Confucius
    =========================== */
 
 /* Reset some browser defaults */
@@ -9,30 +10,109 @@
     box-sizing: border-box;
 }
 
-/* The whole page */
+/* The whole page — warm parchment with subtle texture feel */
 body {
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-    background-color: #1a1a2e;
-    color: #e0e0e0;
+    font-family: "EB Garamond", "Georgia", serif;
+    background-color: #f0e6d3;
+    background-image:
+        radial-gradient(ellipse at 20% 50%, rgba(210, 180, 140, 0.3) 0%, transparent 50%),
+        radial-gradient(ellipse at 80% 20%, rgba(184, 134, 11, 0.05) 0%, transparent 40%);
+    color: #2c1810;
     min-height: 100vh;
     padding: 20px;
+    font-size: 17px;
+    line-height: 1.6;
 }
 
 /* Top section with title */
 header {
     text-align: center;
     padding: 30px 0;
+    border-bottom: 1px solid #c9b896;
+    margin-bottom: 10px;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 header h1 {
-    font-size: 2rem;
-    color: #e0e0e0;
+    font-family: "Cormorant Garamond", "Georgia", serif;
+    font-size: 2.6rem;
+    font-weight: 700;
+    color: #2c1810;
+    letter-spacing: 2px;
 }
 
 .subtitle {
-    color: #888;
+    font-family: "Cormorant Garamond", "Georgia", serif;
+    color: #7a6652;
     margin-top: 8px;
     font-style: italic;
+    font-size: 1.1rem;
+    letter-spacing: 0.5px;
+}
+
+/* Project bar */
+#project-bar {
+    max-width: 600px;
+    margin: 0 auto 10px auto;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 0;
+    border-bottom: 1px solid #d8cdb8;
+}
+
+#project-select {
+    flex: 1;
+    background-color: #faf5eb;
+    border: 1px solid #c9b896;
+    border-radius: 4px;
+    color: #2c1810;
+    padding: 8px 12px;
+    font-size: 0.95rem;
+    font-family: "Cormorant Garamond", "Georgia", serif;
+    font-weight: 600;
+    cursor: pointer;
+    outline: none;
+    appearance: auto;
+}
+
+#project-select:focus {
+    border-color: #8b6914;
+    box-shadow: 0 0 0 2px rgba(139, 105, 20, 0.15);
+}
+
+#new-project-btn,
+#rename-project-btn,
+#delete-project-btn {
+    background-color: #faf5eb;
+    border: 1px solid #c9b896;
+    border-radius: 4px;
+    color: #7a6652;
+    padding: 8px 12px;
+    font-size: 0.8rem;
+    font-family: "EB Garamond", "Georgia", serif;
+    cursor: pointer;
+    transition: all 0.2s;
+    white-space: nowrap;
+}
+
+#new-project-btn:hover {
+    border-color: #1a3a5c;
+    color: #1a3a5c;
+    background-color: rgba(26, 58, 92, 0.05);
+}
+
+#rename-project-btn:hover {
+    border-color: #8b6914;
+    color: #8b6914;
+}
+
+#delete-project-btn:hover {
+    border-color: #8b1a1a;
+    color: #8b1a1a;
+    background-color: rgba(139, 26, 26, 0.05);
 }
 
 /* The container holding all idea cards */
@@ -51,32 +131,37 @@ header h1 {
 
 #empty-message {
     text-align: center;
-    color: #555;
+    color: #9a8872;
     padding: 40px;
     font-style: italic;
+    font-family: "Cormorant Garamond", "Georgia", serif;
+    font-size: 1.1rem;
 }
 
-/* Individual idea cards */
+/* Individual idea cards — like parchment scrolls */
 .idea-card {
-    background-color: #16213e;
-    border: 1px solid #0f3460;
-    border-radius: 8px;
+    background-color: #faf5eb;
+    border: 1px solid #c9b896;
+    border-radius: 4px;
     padding: 16px;
-    transition: border-color 0.2s;
+    transition: border-color 0.2s, box-shadow 0.2s;
+    box-shadow: 0 1px 3px rgba(44, 24, 16, 0.06);
 }
 
 .idea-card:hover {
-    border-color: #e94560;
+    border-color: #8b6914;
+    box-shadow: 0 2px 8px rgba(139, 105, 20, 0.12);
 }
 
 .idea-card .idea-text {
     font-size: 1rem;
-    line-height: 1.5;
+    line-height: 1.6;
+    color: #2c1810;
 }
 
 .idea-card .idea-time {
     font-size: 0.75rem;
-    color: #555;
+    color: #9a8872;
     margin-top: 8px;
 }
 
@@ -84,16 +169,17 @@ header h1 {
     float: right;
     background: none;
     border: none;
-    color: #555;
+    color: #9a8872;
     cursor: pointer;
     font-size: 0.85rem;
     padding: 2px 6px;
     border-radius: 4px;
+    font-family: inherit;
 }
 
 .idea-card .delete-button:hover {
-    color: #e94560;
-    background-color: rgba(233, 69, 96, 0.1);
+    color: #8b1a1a;
+    background-color: rgba(139, 26, 26, 0.08);
 }
 
 /* The input area at the bottom */
@@ -106,38 +192,44 @@ header h1 {
 }
 
 #idea-input {
-    background-color: #16213e;
-    border: 1px solid #0f3460;
-    border-radius: 8px;
-    color: #e0e0e0;
+    background-color: #faf5eb;
+    border: 1px solid #c9b896;
+    border-radius: 4px;
+    color: #2c1810;
     padding: 14px;
     font-size: 1rem;
-    font-family: inherit;
+    font-family: "EB Garamond", "Georgia", serif;
     resize: vertical;
     outline: none;
+    line-height: 1.6;
 }
 
 #idea-input:focus {
-    border-color: #e94560;
+    border-color: #8b6914;
+    box-shadow: 0 0 0 2px rgba(139, 105, 20, 0.15);
 }
 
 #idea-input::placeholder {
-    color: #555;
+    color: #b0a28e;
+    font-style: italic;
 }
 
 #add-button {
-    background-color: #e94560;
-    color: white;
+    background-color: #1a3a5c;
+    color: #f0e6d3;
     border: none;
-    border-radius: 8px;
+    border-radius: 4px;
     padding: 12px;
     font-size: 1rem;
+    font-family: "Cormorant Garamond", "Georgia", serif;
+    font-weight: 600;
     cursor: pointer;
     transition: background-color 0.2s;
+    letter-spacing: 0.5px;
 }
 
 #add-button:hover {
-    background-color: #c73652;
+    background-color: #0f2a45;
 }
 
 /* Filter bar */
@@ -150,25 +242,26 @@ header h1 {
 }
 
 .filter-button {
-    background-color: #16213e;
-    border: 1px solid #0f3460;
+    background-color: #faf5eb;
+    border: 1px solid #c9b896;
     border-radius: 20px;
-    color: #888;
+    color: #7a6652;
     padding: 6px 14px;
     font-size: 0.85rem;
+    font-family: "EB Garamond", "Georgia", serif;
     cursor: pointer;
     transition: all 0.2s;
 }
 
 .filter-button:hover {
-    border-color: #e94560;
-    color: #e0e0e0;
+    border-color: #8b6914;
+    color: #2c1810;
 }
 
 .filter-button.active {
-    background-color: #e94560;
-    border-color: #e94560;
-    color: white;
+    background-color: #1a3a5c;
+    border-color: #1a3a5c;
+    color: #f0e6d3;
 }
 
 /* Tags displayed on idea cards */
@@ -180,8 +273,8 @@ header h1 {
 }
 
 .tag {
-    background-color: rgba(233, 69, 96, 0.15);
-    color: #e94560;
+    background-color: rgba(139, 105, 20, 0.1);
+    color: #8b6914;
     border-radius: 12px;
     padding: 2px 10px;
     font-size: 0.75rem;
@@ -189,17 +282,17 @@ header h1 {
 
 /* Edit mode for idea cards */
 .idea-card .edit-textarea {
-    background-color: #1a1a2e;
-    border: 1px solid #e94560;
-    border-radius: 6px;
-    color: #e0e0e0;
+    background-color: #f5efe3;
+    border: 1px solid #8b6914;
+    border-radius: 4px;
+    color: #2c1810;
     padding: 10px;
     font-size: 1rem;
-    font-family: inherit;
+    font-family: "EB Garamond", "Georgia", serif;
     width: 100%;
     resize: vertical;
     outline: none;
-    line-height: 1.5;
+    line-height: 1.6;
 }
 
 .idea-card .edit-buttons {
@@ -211,30 +304,31 @@ header h1 {
 .idea-card .save-button,
 .idea-card .cancel-button {
     border: none;
-    border-radius: 6px;
+    border-radius: 4px;
     padding: 6px 14px;
     font-size: 0.85rem;
     cursor: pointer;
+    font-family: "EB Garamond", "Georgia", serif;
 }
 
 .idea-card .save-button {
-    background-color: #e94560;
-    color: white;
+    background-color: #1a3a5c;
+    color: #f0e6d3;
 }
 
 .idea-card .save-button:hover {
-    background-color: #c73652;
+    background-color: #0f2a45;
 }
 
 .idea-card .cancel-button {
     background-color: transparent;
-    border: 1px solid #0f3460;
-    color: #888;
+    border: 1px solid #c9b896;
+    color: #7a6652;
 }
 
 .idea-card .cancel-button:hover {
-    border-color: #e94560;
-    color: #e0e0e0;
+    border-color: #8b6914;
+    color: #2c1810;
 }
 
 /* Make the text look clickable */
@@ -247,12 +341,12 @@ header h1 {
 }
 
 .idea-card .idea-text:hover {
-    background-color: rgba(233, 69, 96, 0.08);
+    background-color: rgba(139, 105, 20, 0.06);
 }
 
 .edit-hint {
     font-size: 0.7rem;
-    color: #444;
+    color: #b0a28e;
     text-align: right;
     margin-top: 4px;
     font-style: italic;
@@ -268,38 +362,40 @@ header h1 {
 .idea-card .link-button,
 .idea-card .unlink-button {
     background: none;
-    border: 1px solid #0f3460;
-    border-radius: 6px;
-    color: #888;
+    border: 1px solid #c9b896;
+    border-radius: 4px;
+    color: #7a6652;
     padding: 4px 10px;
     font-size: 0.75rem;
+    font-family: "EB Garamond", "Georgia", serif;
     cursor: pointer;
     transition: all 0.2s;
 }
 
 .idea-card .link-button:hover {
-    border-color: #4fc3f7;
-    color: #4fc3f7;
+    border-color: #1a3a5c;
+    color: #1a3a5c;
 }
 
 .idea-card .unlink-button:hover {
-    border-color: #e94560;
-    color: #e94560;
+    border-color: #8b1a1a;
+    color: #8b1a1a;
 }
 
 /* Link picker dropdown */
 .link-picker {
     margin-top: 8px;
-    background-color: #1a1a2e;
-    border: 1px solid #0f3460;
-    border-radius: 6px;
+    background-color: #f5efe3;
+    border: 1px solid #c9b896;
+    border-radius: 4px;
     padding: 8px;
 }
 
 .link-picker .link-picker-title {
     font-size: 0.8rem;
-    color: #888;
+    color: #7a6652;
     margin-bottom: 6px;
+    font-style: italic;
 }
 
 .link-picker .link-option {
@@ -309,91 +405,98 @@ header h1 {
     background: none;
     border: 1px solid transparent;
     border-radius: 4px;
-    color: #e0e0e0;
+    color: #2c1810;
     padding: 8px;
     font-size: 0.85rem;
+    font-family: "EB Garamond", "Georgia", serif;
     cursor: pointer;
     margin-bottom: 4px;
     transition: all 0.2s;
 }
 
 .link-picker .link-option:hover {
-    border-color: #4fc3f7;
-    background-color: rgba(79, 195, 247, 0.08);
+    border-color: #1a3a5c;
+    background-color: rgba(26, 58, 92, 0.06);
 }
 
 .link-picker .link-cancel {
     background: none;
     border: none;
-    color: #555;
+    color: #9a8872;
     font-size: 0.75rem;
+    font-family: "EB Garamond", "Georgia", serif;
     cursor: pointer;
     margin-top: 4px;
     padding: 4px;
 }
 
 .link-picker .link-cancel:hover {
-    color: #e0e0e0;
+    color: #2c1810;
 }
 
 /* Link display on cards */
 .idea-link {
     font-size: 0.8rem;
-    color: #4fc3f7;
+    color: #1a3a5c;
     margin-top: 6px;
     padding: 4px 0;
 }
 
 .idea-link .link-label {
-    color: #555;
+    color: #9a8872;
+    font-style: italic;
 }
 
 .idea-branches {
     font-size: 0.75rem;
-    color: #555;
+    color: #9a8872;
     margin-top: 4px;
     font-style: italic;
 }
 
-/* Trunk card — the core idea */
+/* Trunk card — the core idea, golden like a philosophical cornerstone */
 .idea-card.is-trunk {
-    border: 2px solid #ffd700;
-    background-color: #1a1e36;
+    border: 2px solid #b8860b;
+    background-color: #fdf8ee;
+    box-shadow: 0 2px 12px rgba(184, 134, 11, 0.1);
 }
 
 .idea-card.is-trunk:hover {
-    border-color: #ffd700;
+    border-color: #b8860b;
+    box-shadow: 0 3px 16px rgba(184, 134, 11, 0.18);
 }
 
 .trunk-label {
-    font-size: 0.75rem;
-    font-weight: bold;
-    color: #ffd700;
+    font-family: "Cormorant Garamond", "Georgia", serif;
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: #8b6914;
     text-transform: uppercase;
-    letter-spacing: 1px;
+    letter-spacing: 2px;
     margin-bottom: 8px;
 }
 
 /* Trunk button in card actions */
 .idea-card .trunk-button {
     background: none;
-    border: 1px solid #0f3460;
-    border-radius: 6px;
-    color: #888;
+    border: 1px solid #c9b896;
+    border-radius: 4px;
+    color: #7a6652;
     padding: 4px 10px;
     font-size: 0.75rem;
+    font-family: "EB Garamond", "Georgia", serif;
     cursor: pointer;
     transition: all 0.2s;
 }
 
 .idea-card .trunk-button:hover {
-    border-color: #ffd700;
-    color: #ffd700;
+    border-color: #b8860b;
+    color: #8b6914;
 }
 
 .idea-card.is-trunk .trunk-button {
-    border-color: #ffd700;
-    color: #ffd700;
+    border-color: #b8860b;
+    color: #8b6914;
 }
 
 /* View toggle buttons */
@@ -406,32 +509,35 @@ header h1 {
 
 .view-button {
     flex: 1;
-    background-color: #16213e;
-    border: 1px solid #0f3460;
-    color: #888;
+    background-color: #faf5eb;
+    border: 1px solid #c9b896;
+    color: #7a6652;
     padding: 10px;
     font-size: 0.9rem;
+    font-family: "Cormorant Garamond", "Georgia", serif;
+    font-weight: 600;
     cursor: pointer;
     transition: all 0.2s;
+    letter-spacing: 0.5px;
 }
 
 .view-button:first-child {
-    border-radius: 8px 0 0 8px;
+    border-radius: 4px 0 0 4px;
 }
 
 .view-button:last-child {
-    border-radius: 0 8px 8px 0;
+    border-radius: 0 4px 4px 0;
     border-left: none;
 }
 
 .view-button:hover {
-    color: #e0e0e0;
+    color: #2c1810;
 }
 
 .view-button.active {
-    background-color: #e94560;
-    border-color: #e94560;
-    color: white;
+    background-color: #1a3a5c;
+    border-color: #1a3a5c;
+    color: #f0e6d3;
 }
 
 /* ========== VISUAL TREE VIEW ========== */
@@ -462,43 +568,45 @@ header h1 {
 .vtree-node {
     position: absolute;
     width: 180px;
-    background-color: #16213e;
-    border: 1px solid #0f3460;
-    border-radius: 8px;
+    background-color: #faf5eb;
+    border: 1px solid #c9b896;
+    border-radius: 4px;
     padding: 12px;
     transition: border-color 0.2s, box-shadow 0.2s;
-    cursor: default;
+    cursor: pointer;
+    box-shadow: 0 1px 3px rgba(44, 24, 16, 0.06);
 }
 
 .vtree-node:hover {
-    border-color: #e94560;
-    box-shadow: 0 0 12px rgba(233, 69, 96, 0.2);
+    border-color: #8b6914;
+    box-shadow: 0 2px 10px rgba(139, 105, 20, 0.15);
 }
 
 .vtree-node.is-trunk {
-    border: 2px solid #ffd700;
-    background-color: #1a1e36;
-    box-shadow: 0 0 16px rgba(255, 215, 0, 0.15);
+    border: 2px solid #b8860b;
+    background-color: #fdf8ee;
+    box-shadow: 0 2px 12px rgba(184, 134, 11, 0.12);
 }
 
 .vtree-node.is-trunk:hover {
-    border-color: #ffd700;
-    box-shadow: 0 0 20px rgba(255, 215, 0, 0.3);
+    border-color: #b8860b;
+    box-shadow: 0 3px 16px rgba(184, 134, 11, 0.22);
 }
 
 .vtree-node .vtree-trunk-label {
+    font-family: "Cormorant Garamond", "Georgia", serif;
     font-size: 0.65rem;
-    font-weight: bold;
-    color: #ffd700;
+    font-weight: 700;
+    color: #8b6914;
     text-transform: uppercase;
-    letter-spacing: 1px;
+    letter-spacing: 2px;
     margin-bottom: 4px;
 }
 
 .vtree-node .vtree-text {
     font-size: 0.85rem;
-    line-height: 1.4;
-    color: #e0e0e0;
+    line-height: 1.5;
+    color: #2c1810;
 }
 
 .vtree-node .vtree-tags {
@@ -510,14 +618,15 @@ header h1 {
 
 /* "Loose thoughts" section below the tree */
 .tree-section-label {
-    font-size: 0.8rem;
-    color: #555;
+    font-family: "Cormorant Garamond", "Georgia", serif;
+    font-size: 0.85rem;
+    color: #7a6652;
     text-transform: uppercase;
-    letter-spacing: 1px;
+    letter-spacing: 2px;
     margin-top: 20px;
     margin-bottom: 8px;
     padding-bottom: 4px;
-    border-bottom: 1px solid #0f3460;
+    border-bottom: 1px solid #c9b896;
 }
 
 .loose-thoughts {
@@ -528,18 +637,25 @@ header h1 {
 }
 
 .loose-thought-card {
-    background-color: #16213e;
-    border: 1px solid #0f3460;
-    border-radius: 6px;
+    background-color: #faf5eb;
+    border: 1px solid #c9b896;
+    border-radius: 4px;
     padding: 10px 14px;
     font-size: 0.85rem;
-    color: #888;
+    color: #7a6652;
     max-width: 200px;
+    cursor: pointer;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.loose-thought-card:hover {
+    border-color: #8b6914;
+    box-shadow: 0 2px 8px rgba(139, 105, 20, 0.1);
 }
 
 .loose-thought-card .vtree-text {
     font-size: 0.85rem;
-    color: #888;
+    color: #7a6652;
 }
 
 /* Expanded node popup */
@@ -549,7 +665,7 @@ header h1 {
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: rgba(0, 0, 0, 0.7);
+    background-color: rgba(44, 24, 16, 0.5);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -557,34 +673,36 @@ header h1 {
 }
 
 .vtree-expanded-card {
-    background-color: #16213e;
-    border: 2px solid #0f3460;
-    border-radius: 12px;
+    background-color: #faf5eb;
+    border: 2px solid #c9b896;
+    border-radius: 6px;
     padding: 24px;
     max-width: 500px;
     width: 90%;
     max-height: 80vh;
     overflow-y: auto;
+    box-shadow: 0 8px 40px rgba(44, 24, 16, 0.2);
 }
 
 .vtree-expanded-card.is-trunk {
-    border-color: #ffd700;
-    box-shadow: 0 0 30px rgba(255, 215, 0, 0.2);
+    border-color: #b8860b;
+    box-shadow: 0 8px 40px rgba(184, 134, 11, 0.2);
 }
 
 .vtree-expanded-card .vtree-trunk-label {
-    font-size: 0.75rem;
-    font-weight: bold;
-    color: #ffd700;
+    font-family: "Cormorant Garamond", "Georgia", serif;
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: #8b6914;
     text-transform: uppercase;
-    letter-spacing: 1px;
+    letter-spacing: 2px;
     margin-bottom: 8px;
 }
 
 .vtree-expanded-card .vtree-full-text {
     font-size: 1.1rem;
-    line-height: 1.6;
-    color: #e0e0e0;
+    line-height: 1.7;
+    color: #2c1810;
 }
 
 .vtree-expanded-card .vtree-tags {
@@ -596,13 +714,13 @@ header h1 {
 
 .vtree-expanded-card .vtree-time {
     font-size: 0.75rem;
-    color: #555;
+    color: #9a8872;
     margin-top: 12px;
 }
 
 .vtree-expanded-card .vtree-branches-info {
     font-size: 0.8rem;
-    color: #4fc3f7;
+    color: #1a3a5c;
     margin-top: 8px;
 }
 
@@ -610,19 +728,20 @@ header h1 {
     display: block;
     margin-top: 16px;
     background: none;
-    border: 1px solid #0f3460;
-    border-radius: 6px;
-    color: #888;
+    border: 1px solid #c9b896;
+    border-radius: 4px;
+    color: #7a6652;
     padding: 8px 16px;
     font-size: 0.85rem;
+    font-family: "EB Garamond", "Georgia", serif;
     cursor: pointer;
     transition: all 0.2s;
     width: 100%;
 }
 
 .vtree-expanded-card .vtree-close:hover {
-    border-color: #e94560;
-    color: #e0e0e0;
+    border-color: #1a3a5c;
+    color: #1a3a5c;
 }
 
 /* Make tree nodes look clickable */
@@ -651,70 +770,77 @@ header h1 {
 .guided-progress-step {
     flex: 1;
     height: 4px;
-    background-color: #0f3460;
+    background-color: #d8cdb8;
     border-radius: 2px;
     transition: background-color 0.3s;
 }
 
 .guided-progress-step.completed {
-    background-color: #e94560;
+    background-color: #1a3a5c;
 }
 
 .guided-progress-step.active {
-    background-color: #ffd700;
+    background-color: #b8860b;
 }
 
 /* The question card */
 .guided-question-card {
-    background-color: #16213e;
-    border: 1px solid #0f3460;
-    border-radius: 12px;
+    background-color: #faf5eb;
+    border: 1px solid #c9b896;
+    border-radius: 6px;
     padding: 24px;
     margin-bottom: 16px;
+    box-shadow: 0 2px 8px rgba(44, 24, 16, 0.06);
 }
 
 .guided-step-number {
-    font-size: 0.75rem;
-    color: #e94560;
+    font-family: "Cormorant Garamond", "Georgia", serif;
+    font-size: 0.8rem;
+    color: #8b6914;
     text-transform: uppercase;
-    letter-spacing: 1px;
+    letter-spacing: 2px;
     margin-bottom: 8px;
+    font-weight: 600;
 }
 
 .guided-question {
-    font-size: 1.2rem;
-    color: #e0e0e0;
+    font-family: "Cormorant Garamond", "Georgia", serif;
+    font-size: 1.4rem;
+    color: #2c1810;
     line-height: 1.5;
     margin-bottom: 4px;
+    font-weight: 600;
 }
 
 .guided-hint {
-    font-size: 0.8rem;
-    color: #555;
+    font-size: 0.85rem;
+    color: #9a8872;
     font-style: italic;
     margin-bottom: 16px;
 }
 
 .guided-textarea {
-    background-color: #1a1a2e;
-    border: 1px solid #0f3460;
-    border-radius: 8px;
-    color: #e0e0e0;
+    background-color: #f5efe3;
+    border: 1px solid #c9b896;
+    border-radius: 4px;
+    color: #2c1810;
     padding: 14px;
     font-size: 1rem;
-    font-family: inherit;
+    font-family: "EB Garamond", "Georgia", serif;
     width: 100%;
     resize: vertical;
     outline: none;
-    line-height: 1.5;
+    line-height: 1.6;
 }
 
 .guided-textarea:focus {
-    border-color: #e94560;
+    border-color: #8b6914;
+    box-shadow: 0 0 0 2px rgba(139, 105, 20, 0.15);
 }
 
 .guided-textarea::placeholder {
-    color: #444;
+    color: #b0a28e;
+    font-style: italic;
 }
 
 .guided-buttons {
@@ -725,115 +851,128 @@ header h1 {
 
 .guided-next-btn {
     flex: 1;
-    background-color: #e94560;
-    color: white;
+    background-color: #1a3a5c;
+    color: #f0e6d3;
     border: none;
-    border-radius: 8px;
+    border-radius: 4px;
     padding: 12px;
     font-size: 1rem;
+    font-family: "Cormorant Garamond", "Georgia", serif;
+    font-weight: 600;
     cursor: pointer;
     transition: background-color 0.2s;
+    letter-spacing: 0.5px;
 }
 
 .guided-next-btn:hover {
-    background-color: #c73652;
+    background-color: #0f2a45;
 }
 
 .guided-next-btn:disabled {
-    background-color: #333;
-    color: #555;
+    background-color: #d8cdb8;
+    color: #9a8872;
     cursor: not-allowed;
 }
 
 .guided-skip-btn {
     background: none;
-    border: 1px solid #0f3460;
-    border-radius: 8px;
-    color: #555;
+    border: 1px solid #c9b896;
+    border-radius: 4px;
+    color: #9a8872;
     padding: 12px 20px;
     font-size: 0.9rem;
+    font-family: "EB Garamond", "Georgia", serif;
     cursor: pointer;
     transition: all 0.2s;
 }
 
 .guided-skip-btn:hover {
-    border-color: #e94560;
-    color: #888;
+    border-color: #8b6914;
+    color: #7a6652;
 }
 
 /* Previously answered steps shown above current question */
 .guided-answered {
-    background-color: #16213e;
-    border: 1px solid #0f3460;
-    border-radius: 8px;
+    background-color: #faf5eb;
+    border: 1px solid #d8cdb8;
+    border-radius: 4px;
     padding: 14px;
     margin-bottom: 10px;
-    opacity: 0.6;
+    opacity: 0.65;
 }
 
 .guided-answered .guided-answered-q {
-    font-size: 0.75rem;
-    color: #888;
+    font-family: "Cormorant Garamond", "Georgia", serif;
+    font-size: 0.8rem;
+    color: #9a8872;
     margin-bottom: 4px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
 }
 
 .guided-answered .guided-answered-a {
     font-size: 0.95rem;
-    color: #e0e0e0;
+    color: #2c1810;
 }
 
 /* Completion card */
 .guided-complete {
-    background-color: #16213e;
-    border: 2px solid #ffd700;
-    border-radius: 12px;
+    background-color: #fdf8ee;
+    border: 2px solid #b8860b;
+    border-radius: 6px;
     padding: 30px;
     text-align: center;
+    box-shadow: 0 4px 20px rgba(184, 134, 11, 0.1);
 }
 
 .guided-complete-title {
-    font-size: 1.3rem;
-    color: #ffd700;
+    font-family: "Cormorant Garamond", "Georgia", serif;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #8b6914;
     margin-bottom: 12px;
 }
 
 .guided-complete-message {
     font-size: 1rem;
-    color: #888;
-    line-height: 1.6;
+    color: #7a6652;
+    line-height: 1.7;
     margin-bottom: 20px;
 }
 
 .guided-complete-btn {
-    background-color: #e94560;
-    color: white;
+    background-color: #1a3a5c;
+    color: #f0e6d3;
     border: none;
-    border-radius: 8px;
+    border-radius: 4px;
     padding: 12px 24px;
     font-size: 1rem;
+    font-family: "Cormorant Garamond", "Georgia", serif;
+    font-weight: 600;
     cursor: pointer;
     margin: 4px;
     transition: background-color 0.2s;
+    letter-spacing: 0.5px;
 }
 
 .guided-complete-btn:hover {
-    background-color: #c73652;
+    background-color: #0f2a45;
 }
 
 .guided-complete-btn.secondary {
     background-color: transparent;
-    border: 1px solid #0f3460;
-    color: #888;
+    border: 1px solid #c9b896;
+    color: #7a6652;
 }
 
 .guided-complete-btn.secondary:hover {
-    border-color: #e94560;
-    color: #e0e0e0;
+    border-color: #8b6914;
+    color: #2c1810;
 }
 
 /* Fix 3-button view toggle */
 .view-button:first-child {
-    border-radius: 8px 0 0 8px;
+    border-radius: 4px 0 0 4px;
 }
 
 .view-button:nth-child(2) {
@@ -842,6 +981,6 @@ header h1 {
 }
 
 .view-button:last-child {
-    border-radius: 0 8px 8px 0;
+    border-radius: 0 4px 4px 0;
     border-left: none;
 }
