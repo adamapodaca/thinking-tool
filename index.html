@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thinking Tool</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header>
+        <h1>Thinking Tool</h1>
+        <p class="subtitle">Capture your ideas before they disappear</p>
+    </header>
+
+    <main>
+        <!-- View toggle -->
+        <section id="view-toggle">
+            <button class="view-button active" id="list-view-btn">List View</button>
+            <button class="view-button" id="tree-view-btn">Tree View</button>
+            <button class="view-button" id="guided-view-btn">Guided Thinking</button>
+        </section>
+
+        <!-- Filter bar for tags -->
+        <section id="filter-bar">
+            <button class="filter-button active" data-tag="all">All</button>
+        </section>
+
+        <!-- Area where all idea cards will appear -->
+        <section id="ideas-container">
+            <p id="empty-message">No ideas yet. Start by adding one below.</p>
+        </section>
+
+        <!-- Input area for new ideas -->
+        <section id="input-area">
+            <textarea
+                id="idea-input"
+                placeholder="What's on your mind? Type a thought, a fragment, anything..."
+                rows="3"
+            ></textarea>
+            <button id="add-button">Add Thought</button>
+        </section>
+    </main>
+
+    <script src="app.js"></script>
+</body>
+</html>
